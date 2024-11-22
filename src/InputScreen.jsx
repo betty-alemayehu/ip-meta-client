@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./InputScreen.scss";
 
-const InputScreen = ({ setJoke }) => {
+const InputScreen = ({ setJokeQuery }) => {
   const navigate = useNavigate();
 
   // Dropdown options
@@ -38,9 +38,11 @@ const InputScreen = ({ setJoke }) => {
   const validateForm = () => {
     const newErrors = {};
     if (!formData.hobby) newErrors.hobby = "Please select a hobby.";
-    if (!formData.age || !ages.includes(formData.age)) newErrors.age = "Please select a valid age group.";
+    if (!formData.age || !ages.includes(formData.age))
+      newErrors.age = "Please select a valid age group.";
     if (!formData.mood) newErrors.mood = "Please select a mood.";
-    if (!formData.humorType) newErrors.humorType = "Please select a type of humor.";
+    if (!formData.humorType)
+      newErrors.humorType = "Please select a type of humor.";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0; // Return true if no errors
@@ -50,18 +52,8 @@ const InputScreen = ({ setJoke }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      // Match joke based on formData (mock logic)
-      import("./jokes").then(({ jokes }) => {
-        const selectedJoke = jokes.find(
-          (j) =>
-            j.hobby === formData.hobby &&
-            j.age === formData.age &&
-            j.mood === formData.mood &&
-            j.type === formData.humorType
-        );
-        setJoke(selectedJoke?.joke || "No jokes available for this combination!");
-        navigate("/output");
-      });
+      setJokeQuery(formData);
+      navigate("/output");
     }
   };
 
@@ -135,7 +127,9 @@ const InputScreen = ({ setJoke }) => {
               </option>
             ))}
           </select>
-          {errors.humorType && <span className="error">{errors.humorType}</span>}
+          {errors.humorType && (
+            <span className="error">{errors.humorType}</span>
+          )}
         </label>
         <button type="submit">Generate Joke</button>
       </form>
