@@ -6,7 +6,7 @@ import OutputScreen from "./OutputScreen";
 import Footer from "./Footer";
 
 const App = () => {
-  const [joke, setJoke] = useState("");
+  const [jokeQuery, setJokeQuery] = useState("");
 
   return (
     <Router
@@ -16,8 +16,11 @@ const App = () => {
       }}
     >
       <Routes>
-        <Route path="/" element={<InputScreen setJoke={setJoke} />} />
-        <Route path="/output" element={<OutputScreen joke={joke} />} />
+        <Route path="/" element={<InputScreen setJokeQuery={setJokeQuery} />} />
+        <Route
+          path="/output"
+          element={<OutputScreen jokeQuery={jokeQuery} />}
+        />
       </Routes>
       <Footer />
     </Router>
