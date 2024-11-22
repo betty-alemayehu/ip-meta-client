@@ -7,12 +7,14 @@
   gap: 1rem;
 
   h1 {
+    padding: 1rem 0 0.5rem 0;
     margin-bottom: 16px;
     text-align: center;
     color: rgb(163, 52, 250);
     opacity: 0;
     position: relative;
     animation: flyIn 4s ease-out forwards;
+    font-family: Arial;
     @keyframes flyIn {
       from {
         transform: translateX(-100);
@@ -68,6 +70,13 @@
     padding: 10px;
     border-radius: 4px;
     font-size: 0.9375rem;
+    cursor: pointer;
+    color: white;
+    &:hover {
+      background: #4267b2;
+      transform: scale(1.1);
+    }
+
     @include tablet {
       padding: 10px 15px;
     }
