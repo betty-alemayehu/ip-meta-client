@@ -31,21 +31,38 @@ const InputScreen = ({ setJoke }) => {
     humorType: "",
   });
 
+  // State for form errors
+  const [errors, setErrors] = useState({});
+
+  // Validate form fields
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.hobby) newErrors.hobby = "Please select a hobby.";
+    if (!formData.age || !ages.includes(formData.age)) newErrors.age = "Please select a valid age group.";
+    if (!formData.mood) newErrors.mood = "Please select a mood.";
+    if (!formData.humorType) newErrors.humorType = "Please select a type of humor.";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0; // Return true if no errors
+  };
+
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Match joke based on formData (mock logic)
-    import("./jokes").then(({ jokes }) => {
-      const selectedJoke = jokes.find(
-        (j) =>
-          j.hobby === formData.hobby &&
-          j.age === formData.age &&
-          j.mood === formData.mood &&
-          j.type === formData.humorType
-      );
-      setJoke(selectedJoke?.joke || "No jokes available for this combination!");
-      navigate("/output");
-    });
+    if (validateForm()) {
+      // Match joke based on formData (mock logic)
+      import("./jokes").then(({ jokes }) => {
+        const selectedJoke = jokes.find(
+          (j) =>
+            j.hobby === formData.hobby &&
+            j.age === formData.age &&
+            j.mood === formData.mood &&
+            j.type === formData.humorType
+        );
+        setJoke(selectedJoke?.joke || "No jokes available for this combination!");
+        navigate("/output");
+      });
+    }
   };
 
   return (
@@ -68,6 +85,7 @@ const InputScreen = ({ setJoke }) => {
               </option>
             ))}
           </select>
+          {errors.hobby && <span className="error">{errors.hobby}</span>}
         </label>
         <label>
           Age:
@@ -83,6 +101,7 @@ const InputScreen = ({ setJoke }) => {
               </option>
             ))}
           </select>
+          {errors.age && <span className="error">{errors.age}</span>}
         </label>
         <label>
           Mood:
@@ -98,6 +117,7 @@ const InputScreen = ({ setJoke }) => {
               </option>
             ))}
           </select>
+          {errors.mood && <span className="error">{errors.mood}</span>}
         </label>
         <label>
           Type of Humor:
@@ -115,6 +135,7 @@ const InputScreen = ({ setJoke }) => {
               </option>
             ))}
           </select>
+          {errors.humorType && <span className="error">{errors.humorType}</span>}
         </label>
         <button type="submit">Generate Joke</button>
       </form>
