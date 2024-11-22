@@ -1,3 +1,4 @@
+import "./app.scss";
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import InputScreen from "./InputScreen";

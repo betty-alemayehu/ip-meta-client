@@ -1,0 +1,57 @@
+//breakpoints
+$tablet-breakpoint: 48rem;
+$desktop-breakpoint: 80rem;
+
+//font sizes for desktop and tablet
+$h1-page-header: 2rem; //32px
+$h2-subheader: 1.5rem; //24px
+$h3-and-p2: 0.875rem; //14px  H3 - Labels, Links & Buttons and P2 - Body Medium
+$h4-and-p3: 0.75rem; // 12px H4 - table header & P3 - Body Small
+$p1-body-large: 1rem; //16px
+
+//font sizes to mobile
+$m-h1-page-header: 1.75rem; //28px
+$m-h2-subheader: 1.25rem; //20px
+$m-h3-p2: 0.8125rem; //13px M H3 - Labels, Links & Buttons and M P2 - Body Medium
+$m-h4-and-p3: 0.6875rem; //11px
+$m-p1-body-large: 0.9375rem; //15px
+
+//line height for desktop and tablet
+$h1-line-height: 2.5rem; //40px
+$h2-line-height: 2rem; //32px
+$h3-p2-line-height: 1.375rem; //22px  H3 - Labels, Links & Buttons and P2 - Body Medium
+$h4-and-p3-line-height: 1.125rem; // 18px H4 - table header & P3 - Body Small
+$p1-line-height: 1.75rem; //28px
+
+//line height for desktop and tablet
+$m-h1-line-height: 2.25rem; //36px
+$m-h2-line-height: 1.75rem; //28px
+$m-h3-and-p2-line-height: 1.25rem; //20px M H3 - Labels, Links & Buttons and M P2 - Body Medium
+$m-h4-and-p3-line-height: 1rem; //16px
+$m-p1-line-height: 1.625rem; //26px
+
+//colors
+$primary-color-1: #13182c; //Instock-Black:  Global text color
+$primary-color-2: #2e66e5; // Instock-Indigo:  Interactive elements
+$primary-color-3: #ffffff; // White:  Global white color
+
+$secondary-color-1: #5c667e; //Slate:  Table column headers & placeholder text
+$secondary-color-2: #bdc5d5; //Cloud:  Outlines, dividers, borders, table sorting icon
+
+$background-color-1: #232940; //Graphite:  Top navigation header background,CTA button hover state background
+$background-color-2: #f7f8f9; //Light-Grey:  Page background,table column header background, CTA background
+
+$supporting-color-1: #158463; //Green:  “In stock” label
+$supporting-color-2: #c94515; //Red:  “Out of stock” label, error states & delete icon
+$supporting-background-color-1: rgba(
+  21,
+  132,
+  99,
+  0.07
+); //Green:  “In stock” background
+$supporting-background-color-2: rgba(
+  201,
+  69,
+  21,
+  0.07
+); //Red:  “Out of stock” background
