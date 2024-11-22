@@ -5,8 +5,8 @@ import "./OutputScreen.scss";
 const OutputScreen = ({ joke }) => {
   const navigate = useNavigate();
 
-  const genericJoke = "Why don’t skeletons fight each other? They don’t have the guts!";
-
+  const genericJoke =
+    "Why don’t skeletons fight each other? They don’t have the guts!";
 
   const [feedback, setFeedback] = useState(null);
 
@@ -18,28 +18,35 @@ const OutputScreen = ({ joke }) => {
   return (
     <div className="output-screen">
       <h1>Your Personalized Joke:</h1>
+      <img src="" alt={`Image for joke:${joke}`} />
       <p aria-live="polite">{joke || genericJoke}</p>
-      
+
       <div className="feedback-buttons">
         <button
           onClick={() => handleFeedback("thumbs-up")}
-          className={`feedback-button ${feedback === "thumbs-up" ? "active" : ""}`}
+          className={`feedback-button ${
+            feedback === "thumbs-up" ? "active" : ""
+          }`}
           aria-label="Thumbs up"
         >
           👍
         </button>
         <button
           onClick={() => handleFeedback("thumbs-down")}
-          className={`feedback-button ${feedback === "thumbs-down" ? "active" : ""}`}
+          className={`feedback-button ${
+            feedback === "thumbs-down" ? "active" : ""
+          }`}
           aria-label="Thumbs down"
         >
           👎
         </button>
       </div>
-      
+
       {feedback && (
         <p className="feedback-message">
-          {feedback === "thumbs-up" ? "Glad you liked it! 🎉" : "We'll try to do better next time! 😢"}
+          {feedback === "thumbs-up"
+            ? "Glad you liked it! 🎉"
+            : "We'll try to do better next time! 😢"}
         </p>
       )}
 
