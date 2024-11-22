@@ -40,7 +40,7 @@ const InputScreen = ({ setJokeQuery }) => {
       newErrors.age = "Please select a valid age group.";
     if (!formData.mood) newErrors.mood = "Please select a mood.";
     if (!formData.humorType)
-      newErrors.humorType = "Please select a type of humour.";
+      newErrors.humorType = "Please select a type of humor.";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -56,10 +56,10 @@ const InputScreen = ({ setJokeQuery }) => {
 
   return (
     <div className="input-screen">
-      <h1 className="input-screen__title">Just for Laughs</h1>
+      <h1>Just for Laughs</h1>
       <form onSubmit={handleSubmit}>
         <label>
-          Favourite Hobby:
+          Favorite Hobby:
           <select
             value={formData.hobby}
             onChange={(e) =>
@@ -106,7 +106,7 @@ const InputScreen = ({ setJokeQuery }) => {
           {errors.mood && <span className="error">{errors.mood}</span>}
         </label>
         <label>
-          Type of Humour:
+          Type of Humor:
           <select
             value={formData.humorType}
             onChange={(e) =>

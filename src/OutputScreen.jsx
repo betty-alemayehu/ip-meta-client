@@ -137,7 +137,7 @@ const OutputScreen = ({ jokeQuery }) => {
         </p>
       )}
 
-      <button className="feedback-jokebutton" onClick={() => navigate("/")}>Get Another Joke</button>
+      <button onClick={() => navigate("/")}>Get Another Joke</button>
     </div>
   );
 };
