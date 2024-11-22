@@ -19,3 +19,19 @@ body {
   overflow-x: hidden;
   @include reset-margin-padding;
 }
+
+.button {
+  background-color: $primary-color-2;
+  width: 100%;
+  color: $primary-color-3;
+  @include h3-font-mob;
+  border: none;
+  border-radius: 1.5625rem;
+  cursor: pointer;
+  height: 2.25rem;
+
+  @include tablet {
+    height: 2.375rem;
+    @include h3-font-tab;
+  }
+}
