@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import "./InputScreen.css";
+import "./InputScreen.scss";
 
 const InputScreen = ({ setJoke }) => {
   const navigate = useNavigate();
