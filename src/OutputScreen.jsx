@@ -26,7 +26,6 @@ const OutputScreen = ({ jokeQuery }) => {
     }
 
     const validPrompt = prompt || "A scenic view illustration.";
-    console.log(validPrompt);
 
     try {
       const response = await axios.post(
