@@ -59,7 +59,7 @@ const InputScreen = ({ setJokeQuery }) => {
 
   return (
     <div className="input-screen">
-      <h1>Just for Laughs</h1>
+      <h1 className="input-screen__title">Just for Laughs</h1>
       <form onSubmit={handleSubmit}>
         <label>
           Favorite Hobby:

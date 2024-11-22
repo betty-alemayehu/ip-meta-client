@@ -6,13 +6,14 @@
   align-items: center;
   padding: 16px;
 
-  h1 {
+  &__title {
     margin-bottom: 24px;
     text-align: center;
-    color: rgb(14, 83, 168);
+    color: rgb(163, 52, 250);
     opacity: 0;
     position: relative;
     animation: flyIn 4s ease-out forwards;
+
     @keyframes flyIn {
       from {
         transform: translateX(-100);
@@ -35,18 +36,18 @@
   form {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 19px;
     width: 100%;
     max-width: 200px;
 
     @include tablet {
       max-width: 500px;
-      gap: 20px;
+      gap: 21px;
     }
 
     @include desktop {
       max-width: 600px;
-      gap: 24px;
+      gap: 25px;
     }
 
     label {
@@ -77,7 +78,8 @@
     font-family: Roboto;
     font-weight: 600;
     font-size: 0.9375rem;
-    background-color: rgb(187, 218, 238);
+    color: white;
+    background: linear-gradient(90deg, #5a5bff, #ff5da2);
     @include tablet {
       width: auto;
       padding: 12px 20px;
