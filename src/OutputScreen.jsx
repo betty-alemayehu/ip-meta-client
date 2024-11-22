@@ -1,13 +1,18 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./OutputScreen.scss";
 
-const OutputScreen = ({ joke }) => {
+const OutputScreen = ({ jokeQuery }) => {
   const navigate = useNavigate();
   const [imageSrc, setImageSrc] = useState(null); // Holds the final image URL
   const [loading, setLoading] = useState(true); // Tracks the loading state
   const [feedback, setFeedback] = useState(null); // Tracks user feedback (thumbs-up or thumbs-down)
+  const [joke, setJoke] = useState("");
+
+  const genericJoke =
+    "Why don’t skeletons fight each other? They don’t have the guts!";
+  const backendURL = import.meta.env.VITE_API_URL;
 
   // Function to generate an image using OpenAI API
   const generateAIImage = async (prompt) => {
@@ -47,7 +52,33 @@ const OutputScreen = ({ joke }) => {
     }
   };
 
-  // Function to handle feedback (thumbs-up or thumbs-down)
+  useEffect(() => {
+    if (!jokeQuery || !backendURL) {
+      setJoke(genericJoke);
+    }
+
+    const fetchJoke = async () => {
+      const queryString = new URLSearchParams({
+        age: jokeQuery.age,
+        humor: jokeQuery.humorType,
+        hobby: jokeQuery.hobby,
+        mood: jokeQuery.mood,
+      }).toString();
+
+      try {
+        const { data } = await axios.get(`${backendURL}/jokes?${queryString}`);
+        if (data) {
+          const joke_text = data?.joke_text ?? genericJoke;
+          setJoke(joke_text);
+        }
+      } catch (e) {
+        setJoke(genericJoke);
+      }
+    };
+
+    fetchJoke();
+  }, [jokeQuery, backendURL]);
+
   const handleFeedback = (type) => {
     setFeedback(type);
     console.log(`User feedback: ${type}`); // Optional: Send feedback to the server for optimization
@@ -67,7 +98,7 @@ const OutputScreen = ({ joke }) => {
   return (
     <div className="output-screen">
       <h1>Your Personalized Joke:</h1>
-      <p>{joke}</p>
+      <p aria-live="polite">{joke}</p>
 
       {/* Conditional Rendering: Show only one image */}
       {loading ? (
@@ -78,6 +109,7 @@ const OutputScreen = ({ joke }) => {
       ) : (
         <img src={imageSrc} alt="AI-generated illustration" />
       )}
+
       <div className="feedback-buttons">
         <button
           onClick={() => handleFeedback("thumbs-up")}
@@ -98,6 +130,15 @@ const OutputScreen = ({ joke }) => {
           👎
         </button>
       </div>
+
+      {feedback && (
+        <p className="feedback-message">
+          {feedback === "thumbs-up"
+            ? "Glad you liked it! 🎉"
+            : "We'll try to do better next time! 😢"}
+        </p>
+      )}
+
       <button onClick={() => navigate("/")}>Get Another Joke</button>
     </div>
   );

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./InputScreen.scss";
 
-const InputScreen = ({ setJoke }) => {
+const InputScreen = ({ setJokeQuery }) => {
   const navigate = useNavigate();
 
   // Dropdown options
@@ -36,7 +36,8 @@ const InputScreen = ({ setJoke }) => {
   const validateForm = () => {
     const newErrors = {};
     if (!formData.hobby) newErrors.hobby = "Please select a hobby.";
-    if (!formData.age) newErrors.age = "Please select an age group.";
+    if (!formData.age || !ages.includes(formData.age))
+      newErrors.age = "Please select a valid age group.";
     if (!formData.mood) newErrors.mood = "Please select a mood.";
     if (!formData.humorType)
       newErrors.humorType = "Please select a type of humor.";
@@ -48,18 +49,7 @@ const InputScreen = ({ setJoke }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      // Import jokes dynamically
-      const { jokes } = await import("./jokes");
-      const selectedJoke = jokes.find(
-        (j) =>
-          j.hobby === formData.hobby &&
-          j.age === formData.age &&
-          j.mood === formData.mood &&
-          j.type === formData.humorType
-      );
-
-      // Set joke or fallback message
-      setJoke(selectedJoke?.joke || "No jokes available for this combination!");
+      setJokeQuery(formData);
       navigate("/output");
     }
   };
