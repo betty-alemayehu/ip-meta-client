@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./OutputScreen.scss";
@@ -9,6 +9,8 @@ const OutputScreen = ({ jokeQuery }) => {
   const [loading, setLoading] = useState(true); // Tracks the loading state
   const [feedback, setFeedback] = useState(null); // Tracks user feedback (thumbs-up or thumbs-down)
   const [joke, setJoke] = useState("");
+
+  const dataFetching = useRef(false); // Track if image has been fetched already
 
   const genericJoke =
     "Why don’t skeletons fight each other? They don’t have the guts!";
@@ -24,7 +26,8 @@ const OutputScreen = ({ jokeQuery }) => {
     }
 
     const validPrompt = prompt || "A scenic view illustration.";
-    console.log(prompt);
+    console.log(validPrompt);
+
     try {
       const response = await axios.post(
         "https://api.openai.com/v1/images/generations",
@@ -53,11 +56,17 @@ const OutputScreen = ({ jokeQuery }) => {
   };
 
   useEffect(() => {
+    if (dataFetching.current) {
+      return; // Prevent multiple API calls if an image is already being fetched
+    }
+
     if (!jokeQuery || !backendURL) {
       return;
     }
 
     const fetchJoke = async () => {
+      dataFetching.current = true;
+
       const queryString = new URLSearchParams({
         age: jokeQuery.age,
         humor: jokeQuery.humorType,
@@ -70,6 +79,7 @@ const OutputScreen = ({ jokeQuery }) => {
         const imageUrl = await generateAIImage(joke);
         setImageSrc(imageUrl); // Set the final image URL
         setLoading(false); // Stop loading
+        dataFetching.current = false;
       };
 
       try {
@@ -137,7 +147,9 @@ const OutputScreen = ({ jokeQuery }) => {
         </p>
       )}
 
-      <button className="feedback-jokebutton" onClick={() => navigate("/")}>Get Another Joke</button>
+      <button className="feedback-jokebutton" onClick={() => navigate("/")}>
+        Get Another Joke
+      </button>
     </div>
   );
 };
