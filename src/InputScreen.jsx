@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import "./InputScreen.css";
+import "./InputScreen.scss";
 
 const InputScreen = ({ setJoke }) => {
   const navigate = useNavigate();
@@ -50,7 +50,7 @@ const InputScreen = ({ setJoke }) => {
 
   return (
     <div className="input-screen">
-      <h1>Let's bring some joy into your feed!</h1>
+      <h1>Just for Laughs</h1>
       <form onSubmit={handleSubmit}>
         <label>
           Favorite Hobby:

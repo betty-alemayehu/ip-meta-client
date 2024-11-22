@@ -1,5 +1,4 @@
 export const jokes = [
-  // Sports & Fitness
   {
     hobby: "Sports & Fitness",
     age: "18-25",
@@ -35,8 +34,6 @@ export const jokes = [
     type: "Slapstick",
     joke: "I started walking to stay healthy. Then I tripped over the treadmill cord!",
   },
-
-  // Arts & Crafts
   {
     hobby: "Arts & Crafts",
     age: "18-25",
@@ -72,8 +69,6 @@ export const jokes = [
     type: "Slapstick",
     joke: "I tried sculpting, but I ended up glued to the floor instead.",
   },
-
-  // Technology & Gaming
   {
     hobby: "Technology & Gaming",
     age: "18-25",
@@ -109,8 +104,6 @@ export const jokes = [
     type: "Slapstick",
     joke: "I tried VR gaming but ended up walking into a wall. Realism at its best!",
   },
-
-  // Travel & Adventure
   {
     hobby: "Travel & Adventure",
     age: "18-25",
@@ -146,8 +139,6 @@ export const jokes = [
     type: "Slapstick",
     joke: "I went zip-lining, and now I can’t zip my jacket. Adventure is rough!",
   },
-
-  // Cooking & Food
   {
     hobby: "Cooking & Food",
     age: "18-25",
