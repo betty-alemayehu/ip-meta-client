@@ -23,7 +23,6 @@ const InputScreen = ({ setJoke }) => {
     "Slapstick",
   ];
 
-  // State for form inputs
   const [formData, setFormData] = useState({
     hobby: "",
     age: "",
@@ -31,37 +30,37 @@ const InputScreen = ({ setJoke }) => {
     humorType: "",
   });
 
-  // State for form errors
   const [errors, setErrors] = useState({});
 
   // Validate form fields
   const validateForm = () => {
     const newErrors = {};
     if (!formData.hobby) newErrors.hobby = "Please select a hobby.";
-    if (!formData.age || !ages.includes(formData.age)) newErrors.age = "Please select a valid age group.";
+    if (!formData.age) newErrors.age = "Please select an age group.";
     if (!formData.mood) newErrors.mood = "Please select a mood.";
-    if (!formData.humorType) newErrors.humorType = "Please select a type of humor.";
+    if (!formData.humorType)
+      newErrors.humorType = "Please select a type of humor.";
 
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0; // Return true if no errors
+    return Object.keys(newErrors).length === 0;
   };
 
-  // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      // Match joke based on formData (mock logic)
-      import("./jokes").then(({ jokes }) => {
-        const selectedJoke = jokes.find(
-          (j) =>
-            j.hobby === formData.hobby &&
-            j.age === formData.age &&
-            j.mood === formData.mood &&
-            j.type === formData.humorType
-        );
-        setJoke(selectedJoke?.joke || "No jokes available for this combination!");
-        navigate("/output");
-      });
+      // Import jokes dynamically
+      const { jokes } = await import("./jokes");
+      const selectedJoke = jokes.find(
+        (j) =>
+          j.hobby === formData.hobby &&
+          j.age === formData.age &&
+          j.mood === formData.mood &&
+          j.type === formData.humorType
+      );
+
+      // Set joke or fallback message
+      setJoke(selectedJoke?.joke || "No jokes available for this combination!");
+      navigate("/output");
     }
   };
 
@@ -76,7 +75,6 @@ const InputScreen = ({ setJoke }) => {
             onChange={(e) =>
               setFormData({ ...formData, hobby: e.target.value })
             }
-            required
           >
             <option value="">Select</option>
             {hobbies.map((hobby) => (
@@ -92,7 +90,6 @@ const InputScreen = ({ setJoke }) => {
           <select
             value={formData.age}
             onChange={(e) => setFormData({ ...formData, age: e.target.value })}
-            required
           >
             <option value="">Select</option>
             {ages.map((age) => (
@@ -108,7 +105,6 @@ const InputScreen = ({ setJoke }) => {
           <select
             value={formData.mood}
             onChange={(e) => setFormData({ ...formData, mood: e.target.value })}
-            required
           >
             <option value="">Select</option>
             {moods.map((mood) => (
@@ -126,7 +122,6 @@ const InputScreen = ({ setJoke }) => {
             onChange={(e) =>
               setFormData({ ...formData, humorType: e.target.value })
             }
-            required
           >
             <option value="">Select</option>
             {humorTypes.map((type) => (
@@ -135,7 +130,9 @@ const InputScreen = ({ setJoke }) => {
               </option>
             ))}
           </select>
-          {errors.humorType && <span className="error">{errors.humorType}</span>}
+          {errors.humorType && (
+            <span className="error">{errors.humorType}</span>
+          )}
         </label>
         <button type="submit">Generate Joke</button>
       </form>
