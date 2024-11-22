@@ -1,0 +1,37 @@
+@use "./mixins" as *;
+@use "./variables" as *;
+@use "./typography" as *;
+
+/* setting everything to border-box */
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  @include reset-margin-padding;
+}
+
+body {
+  font-family: "Roboto";
+  font-weight: 400;
+  min-width: 24.375rem;
+  color: $primary-color-1;
+  background-color: $background-color-2;
+  overflow-x: hidden;
+  @include reset-margin-padding;
+}
+
+.button {
+  background-color: $primary-color-2;
+  width: 100%;
+  color: $primary-color-3;
+  @include h3-font-mob;
+  border: none;
+  border-radius: 1.5625rem;
+  cursor: pointer;
+  height: 2.25rem;
+
+  @include tablet {
+    height: 2.375rem;
+    @include h3-font-tab;
+  }
+}

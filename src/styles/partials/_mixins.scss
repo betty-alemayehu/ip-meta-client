@@ -1,0 +1,76 @@
+@use "./variables" as *;
+
+@mixin tablet {
+  @media screen and (min-width: $tablet-breakpoint) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (min-width: $desktop-breakpoint) {
+    @content;
+  }
+}
+
+@mixin box-sizing {
+  box-sizing: border-box;
+}
+
+@mixin reset-margin-padding {
+  margin: 0;
+  padding: 0;
+}
+
+//---- FONTS ----
+
+// H1 - Page Header
+@mixin h1-font-tab {
+  @include text-style($h1-page-header, $h1-line-height, 600);
+}
+
+@mixin h1-font-mob {
+  @include text-style($m-h1-page-header, $m-h1-line-height, 600);
+}
+
+// H2 - Subheader
+@mixin h2-font-tab {
+  @include text-style($h2-subheader, $h2-line-height, 600);
+}
+
+@mixin h2-font-mob {
+  @include text-style($m-h2-subheader, $m-h2-line-height, 600);
+}
+
+// H3 - Labels, Links & Buttons, and P2 - Body Medium
+@mixin h3-font-tab {
+  @include text-style($h3-and-p2, $h3-and-p2, 600);
+}
+
+@mixin h3-font-mob {
+  @include text-style($m-h3-p2, $m-h3-and-p2-line-height, 600);
+}
+
+// H4 - Table Header & P3 - Body Small
+@mixin h4-font-tab {
+  @include text-style($h4-and-p3, $h4-and-p3-line-height, normal);
+}
+
+@mixin h4-font-mob {
+  @include text-style($m-h4-and-p3, $m-h4-and-p3-line-height, normal);
+}
+
+// P1 - Body Large
+@mixin p1-font-tab {
+  @include text-style($p1-body-large, $p1-line-height, 400);
+}
+
+@mixin p1-font-mob {
+  @include text-style($m-p1-body-large, $m-p1-line-height, 400);
+}
+
+// Generic text-style mixin for reuse
+@mixin text-style($font-size, $line-height, $font-weight) {
+  font-size: $font-size;
+  line-height: $line-height;
+  font-weight: $font-weight;
+}

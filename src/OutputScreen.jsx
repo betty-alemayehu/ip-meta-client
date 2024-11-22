@@ -1,6 +1,5 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
-// import "./OutputScreen.css";
+import "./OutputScreen.scss";
 
 const OutputScreen = ({ joke }) => {
   const navigate = useNavigate();
