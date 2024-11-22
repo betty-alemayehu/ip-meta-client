@@ -1,3 +1,4 @@
+@use "../src/styles/partials/mixins" as *;
 .output-screen {
   display: flex;
   flex-direction: column;
@@ -7,14 +8,27 @@
   h1 {
     margin-bottom: 16px;
     text-align: center;
+    color: rgb(14, 83, 168);
+    opacity: 0;
+    position: relative;
+    animation: flyIn 4s ease-out forwards;
+    @keyframes flyIn {
+      from {
+        transform: translateX(-100);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    @include tablet {
+      margin-bottom: 24px;
+    }
 
-    // @include tablet {
-    //   margin-bottom: 24px;
-    // }
-
-    // @include desktop {
-    //   margin-bottom: 32px;
-    // }
+    @include desktop {
+      margin-bottom: 32px;
+    }
   }
 
   p {
@@ -23,27 +37,38 @@
     max-width: 80%;
     line-height: 1.5;
 
-    // @include tablet {
-    //   margin-bottom: 32px;
-    //   max-width: 60%;
-    // }
+    @include tablet {
+      margin-bottom: 32px;
+      max-width: 60%;
+    }
 
-    // @include desktop {
-    //   margin-bottom: 40px;
-    //   max-width: 50%;
-    // }
+    @include desktop {
+      margin-bottom: 40px;
+      max-width: 50%;
+    }
+  }
+
+  .feedback-buttons {
+    background-color: rgba(32, 128, 193, 0.767);
+  }
+
+  .feedback-jokebutton {
+    margin-top: 1rem;
+    background-color: rgba(154, 209, 251, 0.554);
+    font-family: Roboto;
+    font-weight: 600;
   }
 
   button {
     padding: 10px;
     border-radius: 4px;
+    font-size: 0.9375rem;
+    @include tablet {
+      padding: 10px 15px;
+    }
 
-    // @include tablet {
-    //   padding: 12px 20px;
-    // }
-
-    // @include desktop {
-    //   padding: 14px 24px;
-    // }
+    @include desktop {
+      padding: 14px 24px;
+    }
   }
 }

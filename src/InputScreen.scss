@@ -1,3 +1,5 @@
+@use "../src/styles/partials/mixins" as *;
+
 .input-screen {
   display: flex;
   flex-direction: column;
@@ -7,14 +9,27 @@
   h1 {
     margin-bottom: 24px;
     text-align: center;
+    color: rgb(14, 83, 168);
+    opacity: 0;
+    position: relative;
+    animation: flyIn 4s ease-out forwards;
+    @keyframes flyIn {
+      from {
+        transform: translateX(-100);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    @include tablet {
+      margin-bottom: 32px;
+    }
 
-    // @include tablet {
-    //   margin-bottom: 32px;
-    // }
-
-    // @include desktop {
-    //   margin-bottom: 40px;
-    // }
+    @include desktop {
+      margin-bottom: 40px;
+    }
   }
 
   form {
@@ -24,15 +39,15 @@
     width: 100%;
     max-width: 200px;
 
-    // @include tablet {
-    //   max-width: 500px;
-    //   gap: 20px;
-    // }
+    @include tablet {
+      max-width: 500px;
+      gap: 20px;
+    }
 
-    // @include desktop {
-    //   max-width: 600px;
-    //   gap: 24px;
-    // }
+    @include desktop {
+      max-width: 600px;
+      gap: 24px;
+    }
 
     label {
       display: flex;
@@ -43,13 +58,13 @@
         padding: 8px;
         border-radius: 4px;
 
-        // @include tablet {
-        //   padding: 10px;
-        // }
+        @include tablet {
+          padding: 10px;
+        }
 
-        // @include desktop {
-        //   padding: 12px;
-        // }
+        @include desktop {
+          padding: 12px;
+        }
       }
     }
   }
@@ -59,14 +74,17 @@
     padding: 10px;
     width: 100%;
     border-radius: 4px;
+    font-family: Roboto;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    background-color: rgb(187, 218, 238);
+    @include tablet {
+      width: auto;
+      padding: 12px 20px;
+    }
 
-    // @include tablet {
-    //   width: auto;
-    //   padding: 12px 20px;
-    // }
-
-    // @include desktop {
-    //   padding: 14px 24px;
-    // }
+    @include desktop {
+      padding: 14px 24px;
+    }
   }
 }
