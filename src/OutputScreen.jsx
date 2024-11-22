@@ -24,7 +24,7 @@ const OutputScreen = ({ jokeQuery }) => {
     }
 
     const validPrompt = prompt || "A scenic view illustration.";
-
+    console.log(prompt);
     try {
       const response = await axios.post(
         "https://api.openai.com/v1/images/generations",
@@ -54,7 +54,7 @@ const OutputScreen = ({ jokeQuery }) => {
 
   useEffect(() => {
     if (!jokeQuery || !backendURL) {
-      setJoke(genericJoke);
+      return;
     }
 
     const fetchJoke = async () => {
@@ -65,14 +65,23 @@ const OutputScreen = ({ jokeQuery }) => {
         mood: jokeQuery.mood,
       }).toString();
 
+      const fetchImage = async (joke) => {
+        setLoading(true); // Start loading
+        const imageUrl = await generateAIImage(joke);
+        setImageSrc(imageUrl); // Set the final image URL
+        setLoading(false); // Stop loading
+      };
+
       try {
         const { data } = await axios.get(`${backendURL}/jokes?${queryString}`);
         if (data) {
           const joke_text = data?.joke_text ?? genericJoke;
           setJoke(joke_text);
+          fetchImage(joke_text);
         }
       } catch (e) {
         setJoke(genericJoke);
+        fetchImage(genericJoke);
       }
     };
 
@@ -83,17 +92,6 @@ const OutputScreen = ({ jokeQuery }) => {
     setFeedback(type);
     console.log(`User feedback: ${type}`); // Optional: Send feedback to the server for optimization
   };
-
-  useEffect(() => {
-    const fetchImage = async () => {
-      setLoading(true); // Start loading
-      const imageUrl = await generateAIImage(joke);
-      setImageSrc(imageUrl); // Set the final image URL
-      setLoading(false); // Stop loading
-    };
-
-    fetchImage();
-  }, [joke]);
 
   return (
     <div className="output-screen">
