@@ -23,7 +23,6 @@ const InputScreen = ({ setJokeQuery }) => {
     "Slapstick",
   ];
 
-  // State for form inputs
   const [formData, setFormData] = useState({
     hobby: "",
     age: "",
@@ -31,7 +30,6 @@ const InputScreen = ({ setJokeQuery }) => {
     humorType: "",
   });
 
-  // State for form errors
   const [errors, setErrors] = useState({});
 
   // Validate form fields
@@ -45,11 +43,10 @@ const InputScreen = ({ setJokeQuery }) => {
       newErrors.humorType = "Please select a type of humor.";
 
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0; // Return true if no errors
+    return Object.keys(newErrors).length === 0;
   };
 
-  // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
       setJokeQuery(formData);
@@ -68,7 +65,6 @@ const InputScreen = ({ setJokeQuery }) => {
             onChange={(e) =>
               setFormData({ ...formData, hobby: e.target.value })
             }
-            required
           >
             <option value="">Select</option>
             {hobbies.map((hobby) => (
@@ -84,7 +80,6 @@ const InputScreen = ({ setJokeQuery }) => {
           <select
             value={formData.age}
             onChange={(e) => setFormData({ ...formData, age: e.target.value })}
-            required
           >
             <option value="">Select</option>
             {ages.map((age) => (
@@ -100,7 +95,6 @@ const InputScreen = ({ setJokeQuery }) => {
           <select
             value={formData.mood}
             onChange={(e) => setFormData({ ...formData, mood: e.target.value })}
-            required
           >
             <option value="">Select</option>
             {moods.map((mood) => (
@@ -118,7 +112,6 @@ const InputScreen = ({ setJokeQuery }) => {
             onChange={(e) =>
               setFormData({ ...formData, humorType: e.target.value })
             }
-            required
           >
             <option value="">Select</option>
             {humorTypes.map((type) => (
