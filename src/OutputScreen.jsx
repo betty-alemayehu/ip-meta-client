@@ -7,6 +7,7 @@ const OutputScreen = ({ joke }) => {
   const navigate = useNavigate();
   const [imageSrc, setImageSrc] = useState(null); // Holds the final image URL
   const [loading, setLoading] = useState(true); // Tracks the loading state
+  const [feedback, setFeedback] = useState(null); // Tracks user feedback (thumbs-up or thumbs-down)
 
   // Function to generate an image using OpenAI API
   const generateAIImage = async (prompt) => {
@@ -46,6 +47,12 @@ const OutputScreen = ({ joke }) => {
     }
   };
 
+  // Function to handle feedback (thumbs-up or thumbs-down)
+  const handleFeedback = (type) => {
+    setFeedback(type);
+    console.log(`User feedback: ${type}`); // Optional: Send feedback to the server for optimization
+  };
+
   useEffect(() => {
     const fetchImage = async () => {
       setLoading(true); // Start loading
@@ -71,7 +78,26 @@ const OutputScreen = ({ joke }) => {
       ) : (
         <img src={imageSrc} alt="AI-generated illustration" />
       )}
-
+      <div className="feedback-buttons">
+        <button
+          onClick={() => handleFeedback("thumbs-up")}
+          className={`feedback-button ${
+            feedback === "thumbs-up" ? "active" : ""
+          }`}
+          aria-label="Thumbs up"
+        >
+          👍
+        </button>
+        <button
+          onClick={() => handleFeedback("thumbs-down")}
+          className={`feedback-button ${
+            feedback === "thumbs-down" ? "active" : ""
+          }`}
+          aria-label="Thumbs down"
+        >
+          👎
+        </button>
+      </div>
       <button onClick={() => navigate("/")}>Get Another Joke</button>
     </div>
   );
