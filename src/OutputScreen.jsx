@@ -24,7 +24,7 @@ const OutputScreen = ({ jokeQuery }) => {
     }
 
     const validPrompt = prompt || "A scenic view illustration.";
-
+    console.log(prompt);
     try {
       const response = await axios.post(
         "https://api.openai.com/v1/images/generations",
