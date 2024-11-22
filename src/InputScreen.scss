@@ -1,55 +1,71 @@
+@use "../src/styles/partials/mixins" as *;
+
 .input-screen {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 16px;
-
-  h1 {
+  &__title {
+    padding: 1rem 0 0.5rem 0;
     margin-bottom: 24px;
     text-align: center;
+    color: rgb(163, 52, 250);
+    opacity: 0;
+    position: relative;
+    animation: flyIn 4s ease-out forwards;
+    font-family: Arial;
+    @keyframes flyIn {
+      from {
+        transform: translateX(-100);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    @include tablet {
+      margin-bottom: 32px;
+    }
 
-    // @include tablet {
-    //   margin-bottom: 32px;
-    // }
-
-    // @include desktop {
-    //   margin-bottom: 40px;
-    // }
+    @include desktop {
+      margin-bottom: 40px;
+    }
   }
 
   form {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 19px;
     width: 100%;
     max-width: 200px;
 
-    // @include tablet {
-    //   max-width: 500px;
-    //   gap: 20px;
-    // }
+    @include tablet {
+      max-width: 500px;
+      gap: 21px;
+    }
 
-    // @include desktop {
-    //   max-width: 600px;
-    //   gap: 24px;
-    // }
+    @include desktop {
+      max-width: 600px;
+      gap: 25px;
+    }
 
     label {
       display: flex;
       flex-direction: column;
       gap: 8px;
-
+      color: #4267b2;
       select {
         padding: 8px;
-        border-radius: 4px;
+        border-radius: 12px;
 
-        // @include tablet {
-        //   padding: 10px;
-        // }
+        @include tablet {
+          padding: 10px;
+        }
 
-        // @include desktop {
-        //   padding: 12px;
-        // }
+        @include desktop {
+          padding: 12px;
+        }
       }
     }
   }
@@ -59,14 +75,26 @@
     padding: 10px;
     width: 100%;
     border-radius: 4px;
+    font-family: Roboto;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: white;
+    background: linear-gradient(90deg, #5a5bff, #ff5da2);
+    cursor: pointer;
+    &:hover {
+      background: #4267b2;
+      transform: scale(1.1);
+    }
+    &::after {
+      content: "  😊";
+    }
+    @include tablet {
+      width: auto;
+      padding: 12px 20px;
+    }
 
-    // @include tablet {
-    //   width: auto;
-    //   padding: 12px 20px;
-    // }
-
-    // @include desktop {
-    //   padding: 14px 24px;
-    // }
+    @include desktop {
+      padding: 14px 24px;
+    }
   }
 }
